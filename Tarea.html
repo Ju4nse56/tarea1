@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panadería Los Muertos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Contenedor del menú */
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+        }
+
+        .menu div {
+            background-color: #4CAF50;
+            padding: 10px;
+            text-align: center;
+            flex: 1;
+            color: white;
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        
+
+        /* Contenedor inferior */
+        .content {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            border: 2px solid black;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Primer contenedor (mitad izquierda) */
+        .left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .left > div {
+            flex: 1;
+            margin: 5px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Segundo contenedor (mitad derecha) */
+        .right {
+            flex: 1;
+            padding: 5px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ocultar contenido inicialmente */
+        .hidden {
+            display: none;
+        }
+
+        .right img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            object-position: center;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+
+        .homeimg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .texto-top{
+            font-family: 'Arial', sans-serif; 
+            font-size: 60px;
+            color: #333; 
+        }
+        .textohome,.lic{
+            text-align: left;
+            font-family: 'Arial', sans-serif;
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <!-- Menú superior -->
+    <div class="menu">
+        <div id="home" onclick="changeContent('home');cambiarColorDiv('home')">
+            <img src="Home.png" alt="Inicio" class="homeimg">
+        </div>
+        <div id="pan" onclick="changeContent('pan');cambiarColorDiv('pan')">Pan</div>
+        <div id="bebidas" onclick="changeContent('bebidas');cambiarColorDiv('bebidas')">Bebidas</div>
+        <div id="quesos" onclick="changeContent('quesos');cambiarColorDiv('quesos')">Quesos</div>
+        <div id="pasteles" onclick="changeContent('pasteles');cambiarColorDiv('pasteles')">Pasteles</div>
+    </div>
+
+    <!-- Contenedor inferior -->
+    <div class="content">
+        <!-- Contenedor izquierdo -->
+        <div class="left">
+            <div id="left-top"></div>
+            <div id="left-bottom"></div>
+        </div>
+
+        <!-- Contenedor derecho -->
+        <div class="right">
+            <div id="right-content"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = () => changeContent('home');
+    function cambiarColorDiv(algo) {
+    let color1 = "#E346E0"; 
+    let color2 = "#4CAF50"; 
+
+    
+    let divs = {
+        home: document.getElementById('home'),
+        pan: document.getElementById('pan'),
+        bebidas: document.getElementById('bebidas'),
+        quesos: document.getElementById('quesos'),
+        pasteles: document.getElementById('pasteles')
+    };
+
+    
+    if (divs[algo]) {
+        
+        divs[algo].style.backgroundColor = color1;
+
+        
+        Object.keys(divs).forEach(key => {
+            if (key !== algo) {
+                divs[key].style.backgroundColor = color2;
+            }
+        });
+    }
+}
+    const contentMap = {
+        home: {
+            top: '<p class="texto-top">Panaderia <br> los Muertos.</p>',
+            bottom: '<p class="textohome">Nos complace recibirte en nuestro acogedor rincón del sabor,<br> donde cada pan, pastel y galleta es preparado con <br> amor y dedicación. En Panadería Los Muertos, creemos<br>'+
+            ' en la magia de la panadería artesanal y en la alegría que trae cada bocado recién horneado.</p>',
+            img: 'pan33.jpg',
+            
+        },
+        pan: {
+            top: '<p class="texto-top">Panaderia <br> los Muertos.</p>',
+            bottom: '<ul class="custom-list">' +
+                '<li class="lic">Pan de barra: El típico pan blanco o integral que puedes encontrar en una panadería.</li>' +
+                '<li class="lic" class="lic">Pan de molde: También conocido como pan de sándwich, suave y perfecto para tostadas.</li>' +
+                '<li class="lic">Baguette: Pan francés alargado y crujiente por fuera, suave por dentro.</li>' +
+                '<li class="lic">Pan de centeno: Hecho con harina de centeno, más denso y oscuro.</li>' +
+                '</ul>',
+            img: 'pan2.png'
+        },
+        bebidas: {
+            top: '<p class="texto-top">Panaderia <br> los Muertos.</p>',
+            bottom: '<ul class="custom-list">' +
+                    '<li class="lic">Jugo de Naranja: Clásico y siempre popular.</li>' +
+                    '<li class="lic">Jugo de Maracuyá: Refrescante y con un toque tropical.</li>' +
+                    '<li class="lic">Jugo de Mora: Delicioso y con un sabor agridulce.</li>' +
+                    '<li class="lic">Jugo de Mango: Dulce y cremoso.</li>' +
+                    '<li class="lic">Jugo de Piña: Refrescante y tropical.</li>' +
+                    '</ul>',
+            img: 'jugo1.png'
+        },
+        quesos: {
+            top: '<p class="texto-top">Panaderia <br> los Muertos.</p>',
+            bottom:'<ul class="custom-list">' +
+                    '<li class="lic">Queso Mozzarella: Ideal para panes rellenos y focaccias.</li>' +
+                    '<li class="lic">Queso Cheddar: Perfecto para panes con queso y galletas saladas.</li>' +
+                    '<li class="lic">Queso Parmesano: Excelente para espolvorear sobre panes y galletas saladas.</li>' +
+                    '<li class="lic">Queso Crema: Suave y perfecto para rellenos y glaseados.</li>' +
+                    '<li class="lic">Queso Feta: Ideal para panes rellenos y ensaladas.</li>' +
+                    '</ul>',
+            img: 'queso1.png'
+        },
+        pasteles: {
+            top: '<p class="texto-top">Panaderia <br> los Muertos.</p>',
+            bottom: '<ul class="custom-list">' +
+                    '<li class="lic">Queso Mozzarella: Ideal para panes rellenos y focaccias.</li>' +
+                    '<li class="lic">Queso Cheddar: Perfecto para panes con queso y galletas saladas.</li>' +
+                    '<li class="lic">Queso Parmesano: Excelente para espolvorear sobre panes y galletas saladas.</li>' +
+                    '<li class="lic">Queso Crema: Suave y perfecto para rellenos y glaseados.</li>' +
+                    '<li class="lic">Queso Feta: Ideal para panes rellenos y ensaladas.</li>' +
+                    '</ul>',
+            img: 'pastel2.png'
+        }
+    };
+
+    function changeContent(menuItem) {
+        const selectedContent = contentMap[menuItem];
+
+        if (selectedContent) {
+            document.getElementById('left-top').innerHTML = selectedContent.top;
+            document.getElementById('left-bottom').innerHTML = selectedContent.bottom;
+            document.getElementById('right-content').innerHTML = `<img src="${selectedContent.img}" alt="${menuItem}">`;
+        }
+    }
+    
+
+    
+</script>
+
+</body>
+</html>
+
+</html>
